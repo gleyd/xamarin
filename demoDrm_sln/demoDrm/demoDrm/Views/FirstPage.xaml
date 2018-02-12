@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:demoDrm.Converters"
+             x:Class="demoDrm.Views.FirstPage"
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:DoubleToColorConverter x:Key="doubleToColorConverter" />
+            <converters:DebugConverter x:Key="debugConverter" />
+        </ResourceDictionary>    
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout Margin="10"
+                     BindingContext="{x:Reference Name=SliderMain}">
+            <Label x:Name="LabelSlider"
+                   TextColor="{Binding Path=Value, Converter={StaticResource doubleToColorConverter}}"
+                   Text="{Binding  Path=Value, StringFormat='la valeur est {0:0.0}', Mode=OneWay, Converter={StaticResource debugConverter}}"
+                   FontSize="{Binding Source = {x:Reference Name=SliderMain2}, Path=Value}"
+                   />
+            <Entry Text="{Binding  Path=Value, Mode=TwoWay}" />
+            <Slider x:Name="SliderMain"
+                    Maximum="50"
+                    Minimum="10"
+                    
+                    />
+            <Slider x:Name="SliderMain2"
+                    Maximum="50"
+                    Minimum="10"
+                    
+                    />
+                <!--ValueChanged="Slider_ValueChanged"-->
+        </StackLayout>
+
+    </ContentPage.Content>
+    
+</ContentPage>
